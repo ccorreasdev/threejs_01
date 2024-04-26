@@ -4,16 +4,36 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { loadModelGLTF } from "./loadModel.js";
 
 const canvas = document.querySelector("#canvas");
+const sound = new Audio("./assets/audio/melody.mp3");
+const logoButton = document.querySelector("#logo");
 let camera, scene, renderer, controls;
 let mouse = new THREE.Vector2();
 let model1, model2;
 let scrollTop;
+
+let isSoundPlay = false;
+
+
+logoButton.addEventListener("click", (e) => {
+
+    if (!isSoundPlay) {
+        isSoundPlay = true;
+        sound.play();
+    } else {
+        isSoundPlay = false;
+        sound.currentTime = 0;
+        sound.pause();
+    }
+
+
+});
 
 const scaleValue = (value, minInput, maxInput, minOutput, maxOutput) => {
     return minOutput + (maxOutput - minOutput) * ((value - minInput) / (maxInput - minInput));
 }
 
 const onWindowResize = () => {
+
     const width = window.innerWidth;
     const height = window.innerHeight;
 
@@ -25,20 +45,20 @@ const onWindowResize = () => {
     let cameraPosition;
     if (width >= 768) {
         cameraPosition = new THREE.Vector3(0, 5, 9);
+        console.log(">768")
     } else if (width >= 500) {
         cameraPosition = new THREE.Vector3(0, 5, 12);
+        console.log(">500")
     } else {
-        cameraPosition = new THREE.Vector3(0, 5, 15);
+        console.log("<500")
+        cameraPosition = new THREE.Vector3(0, 5, 12);
     }
 
-    // Mover la cámara suavemente hacia la nueva posición
-    const tween = new TWEEN.Tween(camera.position)
-        .to(cameraPosition, 500) // Duración de la animación en milisegundos
-        .easing(TWEEN.Easing.Quadratic.InOut) // Tipo de suavizado
-        .start();
+    camera.position.copy(cameraPosition);
+    console.log("RESIXZING", width)
 
-    console.log(width);
 };
+
 const onMouseMove = (e) => {
     mouseOnScreen = true;
     e.preventDefault();
@@ -49,6 +69,10 @@ const onMouseMove = (e) => {
 
 
 const onScroll = (e) => {
+
+
+
+
     scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     const carModelScaled = scaleValue(scrollTop, 0, maxScroll, 0, 3);
@@ -75,6 +99,8 @@ const init = async () => {
     camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 5, 12);
     camera.lookAt(0, 0, 0);
+
+
     scene = new THREE.Scene();
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
