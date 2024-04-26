@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cartoon Building
+* source:	https://sketchfab.com/3d-models/cartoon-building-435df25a299a4b78a5f031960b9a6c6a
+* author:	Tunnie (https://sketchfab.com/lktung611)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cartoon Building" (https://sketchfab.com/3d-models/cartoon-building-435df25a299a4b78a5f031960b9a6c6a) by Tunnie (https://sketchfab.com/lktung611) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
