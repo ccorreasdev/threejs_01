@@ -8,7 +8,7 @@ const sound = new Audio("./assets/audio/melody.mp3");
 const logoButton = document.querySelector("#logo");
 let camera, scene, renderer, controls;
 let mouse = new THREE.Vector2();
-let model1, model2;
+let model1, model2, model3;
 let scrollTop;
 
 let isSoundPlay = false;
@@ -41,13 +41,21 @@ const onWindowResize = () => {
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
 
+
+    let cakeScale = 1;
     // Define diferentes posiciones de la cámara según el ancho de la ventana
     let cameraPosition;
     if (width >= 768) {
+        cakeScale = 1;
+        model3.position.set(8, 0, 0);
         cameraPosition = new THREE.Vector3(0, 5, 12);
+        model3.scale.set(cakeScale, cakeScale, cakeScale);
         console.log(">768")
     } else if (width >= 500) {
+        cakeScale = 0.75;
         cameraPosition = new THREE.Vector3(0, 5, 12);
+        model3.position.set(4, 0, 0);
+        model3.scale.set(cakeScale, cakeScale, cakeScale);
         console.log(">500")
     } else {
         console.log("<500")
@@ -126,7 +134,10 @@ const init = async () => {
         return loadModelGLTF("cartoon_building");
     }).then((resolve) => {
         model2 = resolve;
-    })
+        return loadModelGLTF("cake");
+    }).then((resolve) => {
+        model3 = resolve;
+    });
 
     //ADD MODELS TO SCENE
     const roadScale = 0.002;
@@ -140,6 +151,12 @@ const init = async () => {
     model1.rotation.set(0, 0, 0);
     model1.position.set(0, 0, 0);
     scene.add(model1);
+
+    const cakeScale = 1;
+    model3.scale.set(cakeScale, cakeScale, cakeScale);
+    model3.rotation.set(0, 0, 0);
+    model3.position.set(8, 0, 0);
+    scene.add(model3);
 
 
 
@@ -155,7 +172,9 @@ const animate = () => {
 
 
 
-
+    if (model3) {
+        model3.rotation.y += 0.005;
+    }
 
 
     render();
