@@ -63,9 +63,11 @@ html {
 
 .main__layout {
   width: 100%;
+  min-height: calc(100vh - 10rem);
   height: calc(100vh - 10rem);
   padding: 10rem;
 }
+
 .main__container {
   padding-top: 4rem;
   width: 100%;
@@ -74,6 +76,10 @@ html {
   background-color: rgba(255, 255, 255, 0.47);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .main__title {
@@ -93,9 +99,13 @@ html {
   margin-top: 2rem;
 }
 
+.main__subtitle__last {
+  margin-bottom: 2rem;
+}
+
 .footer {
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  bottom: -190px;
   width: 100%;
   height: 80px;
   background-color: rgba(255, 255, 255, 0.47);
@@ -106,4 +116,14 @@ html {
   justify-content: center;
   align-items: center;
   color: #2a292c;
+}
+
+@media (max-width: 768px) {
+  .main__layout {
+    padding: 2rem;
+  }
+
+  .navbar__list {
+    flex-direction: column;
+  }
 }

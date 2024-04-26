@@ -14,21 +14,31 @@ const scaleValue = (value, minInput, maxInput, minOutput, maxOutput) => {
 }
 
 const onWindowResize = () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(width, height);
 
-    if (window.innerWidth >= 768) {
-        camera.position.set(0, 5, 9);
+    // Define diferentes posiciones de la cámara según el ancho de la ventana
+    let cameraPosition;
+    if (width >= 768) {
+        cameraPosition = new THREE.Vector3(0, 5, 9);
+    } else if (width >= 500) {
+        cameraPosition = new THREE.Vector3(0, 5, 12);
+    } else {
+        cameraPosition = new THREE.Vector3(0, 5, 15);
     }
-    else if (window.innerWidth >= 500) {
-        camera.position.set(0, 5, 12);
-    } else if (window.innerWidth >= 400) {
-        camera.position.set(0, 5, 15);
-    }
-    console.log(window.innerWidth);
+
+    // Mover la cámara suavemente hacia la nueva posición
+    const tween = new TWEEN.Tween(camera.position)
+        .to(cameraPosition, 500) // Duración de la animación en milisegundos
+        .easing(TWEEN.Easing.Quadratic.InOut) // Tipo de suavizado
+        .start();
+
+    console.log(width);
 };
-
 const onMouseMove = (e) => {
     mouseOnScreen = true;
     e.preventDefault();
@@ -60,6 +70,7 @@ const onScroll = (e) => {
 
 const init = async () => {
     window.addEventListener("scroll", onScroll);
+    window.addEventListener("resize", onWindowResize);
 
     camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 5, 12);
