@@ -44,7 +44,7 @@ const onWindowResize = () => {
     // Define diferentes posiciones de la cámara según el ancho de la ventana
     let cameraPosition;
     if (width >= 768) {
-        cameraPosition = new THREE.Vector3(0, 5, 9);
+        cameraPosition = new THREE.Vector3(0, 5, 12);
         console.log(">768")
     } else if (width >= 500) {
         cameraPosition = new THREE.Vector3(0, 5, 12);
@@ -55,7 +55,7 @@ const onWindowResize = () => {
     }
 
     camera.position.copy(cameraPosition);
-    console.log("RESIXZING", width)
+    console.log("RESIZING", width)
 
 };
 

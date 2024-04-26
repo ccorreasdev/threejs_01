@@ -21,6 +21,8 @@ html {
   width: 100%;
   background-color: rgb(194, 194, 194);
   background: linear-gradient(-45deg, #dbd4e5, #d9d5e5, #d7d7e3);
+  background: linear-gradient(180deg, #9adfed, #3f98b7);
+
   z-index: 99;
 }
 
@@ -48,10 +50,14 @@ html {
   justify-content: center;
   align-items: center;
   gap: 5rem;
+  background-color: rgba(0, 0, 0, 0.775);
+  border-radius: 10px;
+  padding-left: 1rem;
 }
 
 .navbar__item {
   color: #2a292c;
+  color: white;
 }
 
 .navbar__button {
@@ -125,5 +131,7 @@ html {
 
   .navbar__list {
     flex-direction: column;
+    padding-left: 0rem;
+    padding-top: 1rem;
   }
 }
